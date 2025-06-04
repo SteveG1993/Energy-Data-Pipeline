@@ -7,6 +7,11 @@ from io import StringIO
 import logging
 import os
 
+data_sources = ['/fiveminutelmp/current']
+
+
+
+
 # Configure logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -23,7 +28,9 @@ def lambda_handler(event, context):
         # Configuration
         bucket_name = os.environ.get('S3_BUCKET_NAME', 's3-for-energy')
         api_base_url = 'https://webservices.iso-ne.com/api/v1.1'
-        
+        full_source_url = f'{api_base_url}/{data_sources}'
+
+
         # Extract data from API
         energy_data = extract_energy_data(api_base_url)
         
@@ -58,7 +65,7 @@ def lambda_handler(event, context):
             'body': json.dumps(f'Error: {str(e)}')
         }
 
-def extract_energy_data(api_base_url):
+def extract_energy_data(full_source_url):
     """
     Extract energy data from ISO-NE API
     """
@@ -72,7 +79,7 @@ def extract_energy_data(api_base_url):
         end_date_str = end_date.strftime('%Y%m%d')
         
         # API endpoint for real-time load data
-        endpoint = f"{api_base_url}/genmix/current.json"
+        endpoint = f"{full_source_url}"
         
         logger.info(f"Calling API endpoint: {endpoint}")
         
