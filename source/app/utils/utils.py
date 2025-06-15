@@ -11,3 +11,8 @@ def fetch_from_py_config(config_name: str, auth: Union[Tuple[str, str], requests
     config = API_CONFIGS[config_name]
     return fetch_api_data(config['url'], auth,
                           params=config['params'], headers=headers)
+
+
+
+
+

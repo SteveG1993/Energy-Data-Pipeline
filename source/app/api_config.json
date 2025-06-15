@@ -16,6 +16,22 @@
       "output_folder": "iso_ne_current_7_day_forecast",
       "csv_prefix": "demand"
     },
+       {
+      "name": "Hourly DA LMP Final",
+      "description": "Locational marginal pricing",
+      "url": "https://webservices.iso-ne.com/api/v1.1/hourlylmp/da/final",
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "auth_type": "basic",
+      "username": "steveg93@gmail.com",
+      "params": {},
+      "timeout": 30,
+      "output_folder": "hourly_final_lmp",
+      "csv_prefix": "hourly_final_lmp"
+    },
     {
       "name": "iso_ne_fuel_mix",
       "description": "ISO New England Current Fuel Mix",

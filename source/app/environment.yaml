@@ -1,0 +1,95 @@
+# Energy Data Pipeline - Conda Environment Configuration
+# File: environment.yml
+
+name: energy-data-pipeline
+channels:
+  - conda-forge
+  - defaults
+  - anaconda
+
+dependencies:
+  # Python version
+  - python=3.9
+
+  # Core data processing
+  - pandas>=1.5.0
+  - numpy>=1.21.0
+  - pyarrow>=10.0.0  # For Parquet support
+
+  # HTTP requests and API interaction
+  - requests>=2.28.0
+  - urllib3>=1.26.0
+
+  # Database
+  - sqlite>=3.40.0
+
+  # Data visualization
+  - matplotlib>=3.6.0
+  - seaborn>=0.12.0
+  - plotly>=5.11.0
+
+  # Scheduling and automation
+  - schedule>=1.2.0
+
+  # Testing framework
+  - pytest>=7.0.0
+  - pytest-cov>=4.0.0
+  - pytest-mock>=3.10.0
+
+  # Development tools
+  - jupyter>=1.0.0
+  - jupyterlab>=3.5.0
+  - ipython>=8.0.0
+
+  # Code quality and formatting
+  - black>=22.0.0
+  - flake8>=5.0.0
+  - isort>=5.10.0
+  - pylint>=2.15.0
+
+  # Documentation
+  - sphinx>=5.0.0
+  - sphinx_rtd_theme>=1.0.0
+
+  # Environment management
+  - python-dotenv>=1.0.0
+
+  # Date/time handling
+  - python-dateutil>=2.8.0
+
+  # Logging and monitoring
+  - loguru>=0.6.0
+
+  # Configuration management
+  - pyyaml>=6.0
+  - configparser>=5.3.0
+
+  # AWS SDK (for cloud deployment)
+  - boto3>=1.26.0
+  - botocore>=1.29.0
+
+#  # Infrastructure as Code
+#  - pip
+#
+#  # Pip-only dependencies (not available via conda)
+#  - pip:
+#    - aws-cdk-lib>=2.60.0
+#    - aws-cdk.aws-lambda>=1.204.0
+#    - constructs>=10.1.0
+#    - moto>=4.0.0  # AWS mocking for tests
+#    - freezegun>=1.2.0  # Time mocking for tests
+#    - responses>=0.22.0  # HTTP mocking for tests
+
+# Optional dependencies for extended functionality
+variables:
+  # Development environment variables
+  PYTHONPATH: "${CONDA_PREFIX}/src:${PYTHONPATH}"
+  LOG_LEVEL: "INFO"
+  PYTEST_ADDOPTS: "--cov=src --cov-report=html --cov-report=term"
+
+# Additional metadata
+description: >
+  Conda environment for the Energy Data Pipeline project.
+  Includes all dependencies for data extraction, processing, 
+  analysis, visualization, testing, and AWS cloud deployment.
+
