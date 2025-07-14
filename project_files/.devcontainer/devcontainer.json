@@ -1,0 +1,52 @@
+{
+    // Dev Container configuration for VS Code
+    "name": "Docker Python Learning Environment",
+    
+    // Use docker-compose to build and run the container
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "python-app",
+    "workspaceFolder": "/app",
+    
+    // VS Code settings to apply inside the container
+    "settings": {
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.formatting.provider": "black",
+        "python.terminal.activateEnvironment": false,
+        "files.eol": "\n",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    
+    // VS Code extensions to install automatically in the container
+    "extensions": [
+        "ms-python.python",           // Python language support
+        "ms-python.pylint",           // Python linting
+        "ms-python.black-formatter",  // Python code formatting
+        "ms-toolsai.jupyter",         // Jupyter notebook support
+        "ms-azuretools.vscode-docker", // Docker support
+        "ms-vscode.vscode-json",      // JSON support
+        "redhat.vscode-yaml",         // YAML support
+        "ms-python.isort"             // Python import sorting
+    ],
+    
+    // Commands to run after container is created
+    "postCreateCommand": "pip install --user -r requirements.txt",
+    
+    // Forward ports (if needed for web development later)
+    "forwardPorts": [8080],
+    
+    // Use 'root' for full container access, or 'appuser' for security
+    "remoteUser": "appuser",
+    
+    // Mount the Docker socket for Docker-in-Docker (optional)
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    
+    // Container environment variables
+    "containerEnv": {
+        "PYTHONPATH": "/app"
+    }
+}

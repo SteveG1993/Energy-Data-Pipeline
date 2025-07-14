@@ -1,0 +1,45 @@
+# Docker Compose version (3.8 is modern and widely supported)
+# version: '3.8' No longer needed in newer Docker Compose versions
+
+# Define the services (containers) for this application
+services:
+  # Name of our service/container
+  python-app:
+    # Build the image from the Dockerfile in current directory
+    build:
+      context: .        # Use current directory as build context
+      dockerfile: Dockerfile    # Use the Dockerfile we created
+    
+    # Name the container for easy identification
+    container_name: python-hello-container
+    
+    # Mount volumes to enable live code editing
+    # This maps your local directory to /app in the container
+    volumes:
+      - .:/app          # Current directory -> /app in container
+      - /app/__pycache__    # Exclude Python cache files
+    
+    # Keep container running for interactive development
+    # Override the default CMD to keep it alive
+    command: tail -f /dev/null
+    
+    # Restart policy: restart if container stops unexpectedly
+    restart: unless-stopped
+    
+    # Optional: Set environment variables
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1    # Ensure Python output appears immediately
+    
+    # Optional: Map ports if you plan to run web services later
+    # ports:
+    #   - "8080:8080"
+    
+    # Optional: Add networks for multi-container applications
+    # networks:
+    #   - app-network
+
+# Optional: Define custom networks
+# networks:
+#   app-network:
+#     driver: bridge
